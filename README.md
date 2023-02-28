@@ -126,9 +126,9 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 ```js
 {
     login: "martoura",
-    email: "mouratins@hotmail.com"
-    Telefone: '11 94446-6450',
-    Senha: "ilovc0de",
+    email: "mouratins@hotmail.com",
+    telefone: '11 94446-6450',
+    senha: "ilovc0de",
 }
 
 ```
@@ -151,9 +151,9 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 ```js
 {
     login: "mouratins",
-    email: "mouratins@hotmail.com"
-    Telefone: '11 94446-6450',
-    Senha: "ilovc0de",
+    email: "mouratins@hotmail.com",
+    telefone: '11 94446-6450',
+    senha: "ilovc0de",
 }
 
 ```
