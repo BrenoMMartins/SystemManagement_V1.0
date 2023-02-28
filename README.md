@@ -76,7 +76,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 |código | descrição
 |-|-
-| **201** | dados da despesa retornados
+| **201** | dados da tarefa retornados
 | **404** | não existe prioridade com o id informado 
 
 ---
