@@ -39,8 +39,8 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ```js
 {
-    tarefa: "Tarefa "Plano de Voo"",
-    descricao: "Tarefa de DBE"
+    tarefa: "Plano de Voo",
+    descricao: "Tarefa de DBE",
     data: '2023-03-06',
     prioridade_id: 2,
 }
@@ -62,7 +62,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ```js
 {
-    tarefa: "Tarefa"Plano de Voo"",
+    tarefa: "Plano de Voo",
     descricao: "Tarefa de DBE",
     data: '2023-02-27',
     prioridade{
@@ -89,10 +89,10 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 | campo | tipo | obrigatório | descrição 
 |:-------:|:------:|:-------------:|---
-|Login | texto | sim | username do usuario
-|Email | texto | sim | o email do usuario
-|Telefone| int | sim | o telefone do usuario
-|Senha | texto | sim | a senha do usuario
+|login | texto | sim | username do usuario
+|email | texto | sim | o email do usuario
+|telefone| int | sim | o telefone do usuario
+|senha | texto | sim | a senha do usuario
 
 ---
 
@@ -101,9 +101,9 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 ```js
 {
     login: "mouratins",
-    email: "mouratins@hotmail.com"
-    Telefone: '11 94446-6401',
-    Senha: "Eu4moDBE",
+    email: "mouratins@hotmail.com",
+    telefone: '11 94446-6401',
+    senha: "Eu4moDBE",
 }
 
 ```
