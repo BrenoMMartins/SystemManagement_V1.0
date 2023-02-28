@@ -1,38 +1,37 @@
 # SystemManagement_V1.0-
 
-Repositorio destinada a aula de DBE, gerenciador de gastos pessoais.
+Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ## Endpoints
 
-- Despesas
-    - [cadastrar](#cadastrar-despesas) 
+- Tarefa
+    - [cadastrar](#cadastra-tarefa)
     - apagar
-    - alterar - listar todas
+    - listar todas
     - alterar
-    - mostrar detalhes
+    - [detalhes](#detalhes-da-tarefa)
 
-- Contas
-    - cadastrar 
+- Usuario
+    - [cadastrar](#cadastrar-usuario) 
     - apagar
-    - alterar - listar todas
-    - alterar
-    - mostrar detalhes
+    - listar todas
+    - [alterar](#alterar-usuario)
+    - [detalhes](#detalhes-do-usuario)
 
 ---
 
-### Cadastrar Despesas 
+### Cadastrar da Tarefa 
 
-`POST` /meujulius/api/despesas
+`POST` /systemmanagement_V1.0-/api/tarefa
 
 **Campos da Requisição**
 
-| campo | tipo | obrigatório | descrição
+| campo| tipo | obrigatório | descrição
 |:-------:|:------:|:-------------:|:----------:
-|valor | decimal | sim | o valor da despesa, deve ser maior que zero
-|data | data | sim | a data da despesa
-|conta_id | int | sim | o id da conta previamente cadastrada
-|categoria_id | int | sim | o id de uma categoria 
-|descrição | texto | não | um texto sobre a despesa 
+| tarefa | texto | sim | titulo da tarefa 
+|data | data | sim | a data limite de entrega
+|descrição | texto | não | um texto sobre a tarefa
+|prioridade_id | int | sim | o id de prioridade 
 
 ---
 
@@ -40,10 +39,10 @@ Repositorio destinada a aula de DBE, gerenciador de gastos pessoais.
 
 ```js
 {
-    valor: 100.00,
-    data: '2023-02-27',
-    conta_id: 1,
-    descricao: "cinema - homem aranha"
+    tarefa: "Tarefa "Plano de Voo"",
+    descricao: "Tarefa de DBE"
+    data: '2023-03-06',
+    prioridade_id: 2,
 }
 
 ```
@@ -52,29 +51,24 @@ Repositorio destinada a aula de DBE, gerenciador de gastos pessoais.
 
 |código | descrição
 |-|-
-| **201** | despesa cadastrada com sucesso 
-| **400** | campos invalidos 
-
+| **201** | tarefa cadastrada com sucesso 
+| **400** | campos inválidos
 ---
-## Detalhes da Despesa 
+### Detalhes da Tarefa
 
-`GET` /meujulius/api/despesas/{id}
+`GET` /systemmanagement_V1.0-/api/tarefa/{id}
 
 **Exemplo corpo de resposta**
 
 ```js
 {
-    valor: 100.00,
+    tarefa: "Tarefa"Plano de Voo"",
+    descricao: "Tarefa de DBE",
     data: '2023-02-27',
-    conta{
-        cinta_id: 1,
-        nome: "itaú"
-    },
-    categoria{
-        categoria_id: 1,
-        nome: "lazer"
-    },
-    descricao: "cinema - homem aranha"
+    prioridade{
+        prioridade_id: 2,
+        nome: "Importante"
+    }
 }
 ```
 
@@ -83,9 +77,93 @@ Repositorio destinada a aula de DBE, gerenciador de gastos pessoais.
 |código | descrição
 |-|-
 | **201** | dados da despesa retornados
-| **404** | não existe despesa com o id informado 
+| **404** | não existe prioridade com o id informado 
 
+---
 
+### Cadastrar Usuario 
+
+`POST` /systemmanagement_V1.0-/api/usuario
+
+**Campos da Requisição**
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|---
+|Login | texto | sim | username do usuario
+|Email | texto | sim | o email do usuario
+|Telefone| int | sim | o telefone do usuario
+|Senha | texto | sim | a senha do usuario
+
+---
+
+**Exemplo corpo de requisição**
+
+```js
+{
+    login: "mouratins",
+    email: "mouratins@hotmail.com"
+    Telefone: '11 94446-6401',
+    Senha: "Eu4moDBE",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **201** | usuario cadastrado com sucesso 
+| **400** | campos inválidos
+
+---
+
+### Alterar Usuario
+
+`PUT` /systemmanagement_V1.0-/api/usuario
+
+**Exemplo corpo de resposta**
+
+```js
+{
+    login: "martoura",
+    email: "mouratins@hotmail.com"
+    Telefone: '11 94446-6450',
+    Senha: "ilovc0de",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **202** | usuario alterado com sucesso
+| **401** | username ja esta em uso
+
+---
+
+### Detalhes do Usuario
+
+`GET` /systemmanagement_V1.0-/api/usuario
+
+**Exemplo corpo de resposta**
+
+```js
+{
+    login: "mouratins",
+    email: "mouratins@hotmail.com"
+    Telefone: '11 94446-6450',
+    Senha: "ilovc0de",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **201** | dados do usuario retornados
+| **404** | username inexistente 
 
 
 
