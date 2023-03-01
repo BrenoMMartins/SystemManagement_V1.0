@@ -35,7 +35,10 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ```js
 {
-    tarefa_id: 1,
+    tarefa{
+        tarefa_id: 1,
+        nome: "Plano de Voo"
+    }
     descricao: "Tarefa de DBE",
     data: '2023-03-06',
     prioridade_id: 2,
