@@ -6,15 +6,13 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 - Tarefa
     - [cadastrar](#cadastra-tarefa)
-    - apagar
-    - listar todas
-    - alterar
+    - [apagar](#apagar-tarefa)
+    - [alterar](#alterar-tarefa)
     - [detalhes](#detalhes-da-tarefa)
 
 - Usuario
     - [cadastrar](#cadastrar-usuario) 
-    - apagar
-    - listar todas
+    - [apagar](#alterar-usuario)
     - [alterar](#alterar-usuario)
     - [detalhes](#detalhes-do-usuario)
 
@@ -22,24 +20,22 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ### Cadastrar da Tarefa 
 
-`POST` /systemmanagement_V1.0-/api/tarefa
+`POST` /systemmanagement_V1.0-/api/tarefa{id}
 
 **Campos da Requisição**
 
 | campo| tipo | obrigatório | descrição
 |:-------:|:------:|:-------------:|:----------:
-| tarefa | texto | sim | titulo da tarefa 
+| tarefa_id | int | sim | titulo da tarefa 
 |data | data | sim | a data limite de entrega
 |descrição | texto | não | um texto sobre a tarefa
 |prioridade_id | int | sim | o id de prioridade 
-
----
 
 **Exemplo corpo de requisição**
 
 ```js
 {
-    tarefa: "Plano de Voo",
+    tarefa_id: 1,
     descricao: "Tarefa de DBE",
     data: '2023-03-06',
     prioridade_id: 2,
@@ -54,20 +50,49 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 | **201** | tarefa cadastrada com sucesso 
 | **400** | campos inválidos
 ---
-### Detalhes da Tarefa
+### Apagar Tarefa
 
-`GET` /systemmanagement_V1.0-/api/tarefa/{id}
+`DELETE`/systemmanagement_V1.0-/api/tarefa/{id}
 
 **Exemplo corpo de resposta**
 
 ```js
 {
-    tarefa: "Plano de Voo",
+    tarefa{
+        tarefa_id: 1,
+        nome: "Plano de Voo"
+    }
     descricao: "Tarefa de DBE",
     data: '2023-02-27',
     prioridade{
         prioridade_id: 2,
-        nome: "Importante"
+        nome: "Urgente"
+    }
+}
+```
+
+|código | descrição
+|-|-
+| **200** | tarefa apagada com sucesso
+| **404** | id da tarefa não encontrado
+---
+### Alterar Tarefa
+
+`PUT`/systemmanagement_V1.0-/api/tarefa/{id}
+
+**Exemplo corpo de resposta**
+
+```js
+{
+    tarefa{
+        tarefa_id: 3,
+        nome: "Arquitetura de Dados"
+    }
+    descricao: "Tarefa de DBE",
+    data: '2023-02-27',
+    prioridade{
+        prioridade_id: 1,
+        nome: "Pouco Urgente"
     }
 }
 ```
@@ -76,31 +101,57 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 |código | descrição
 |-|-
-| **201** | dados da tarefa retornados
+| **202** | dados da tarefa alterados com sucesso
+| **401** | data invalida 
+---
+### Detalhes da Tarefa
+
+`GET`/systemmanagement_V1.0-/api/tarefa/{id}
+
+**Exemplo corpo de resposta**
+
+```js
+{
+    tarefa{
+        tarefa_id: 1,
+        nome: "Arquitetura de Dados"
+    }
+    descricao: "Tarefa de DBE",
+    data: '2023-02-27',
+    prioridade{
+        prioridade_id: 1,
+        nome: "Pouco Urgente"
+    }
+}
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **200** | dados da tarefa retornados
 | **404** | não existe prioridade com o id informado 
 
 ---
 
 ### Cadastrar Usuario 
 
-`POST` /systemmanagement_V1.0-/api/usuario
+`POST`/systemmanagement_V1.0-/api/usuario
 
 **Campos da Requisição**
 
 | campo | tipo | obrigatório | descrição 
 |:-------:|:------:|:-------------:|---
-|login | texto | sim | username do usuario
+|login_id | int | sim | username do usuario
 |email | texto | sim | o email do usuario
 |telefone| int | sim | o telefone do usuario
 |senha | texto | sim | a senha do usuario
-
----
 
 **Exemplo corpo de requisição**
 
 ```js
 {
-    login: "mouratins",
+    login_id: 1,
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6401',
     senha: "Eu4moDBE",
@@ -114,18 +165,41 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 |-|-
 | **201** | usuario cadastrado com sucesso 
 | **400** | campos inválidos
+---
+## Apagar Usuario 
 
+`DELETE`/systemmanagement_V1.0-/api/usuario{id}
+
+```js
+{
+    login_id: 1,
+    email: "mouratins@hotmail.com",
+    telefone: '11 94446-6401',
+    senha: "Eu4moDBE",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **200** | usuario apagado com sucesso 
+| **404** | id do usuario não encontrado
 ---
 
 ### Alterar Usuario
 
-`PUT` /systemmanagement_V1.0-/api/usuario
+`PUT`/systemmanagement_V1.0-/api/usuario{id}
 
 **Exemplo corpo de resposta**
 
 ```js
 {
-    login: "martoura",
+    login{
+        login_id: 1,
+        nome: "mouratins"
+    }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6450',
     senha: "ilovc0de",
@@ -144,13 +218,16 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ### Detalhes do Usuario
 
-`GET` /systemmanagement_V1.0-/api/usuario
+`GET`/systemmanagement_V1.0-/api/usuario{id}
 
 **Exemplo corpo de resposta**
 
 ```js
 {
-    login: "mouratins",
+    login{
+        login_id: 1,
+        nome: "mouratins"
+    }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6450',
     senha: "ilovc0de",
@@ -162,8 +239,8 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 |código | descrição
 |-|-
-| **201** | dados do usuario retornados
-| **404** | username inexistente 
+| **200** | dados do usuario retornados
+| **404** | id do usuario não encontrado
 
 
 
