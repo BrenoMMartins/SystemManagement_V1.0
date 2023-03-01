@@ -132,7 +132,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 |código | descrição
 |-|-
-| **200** | dados da tarefa retornados
+| **200** | dados da tarefa retornados com sucesso
 | **404** | não existe prioridade com o id informado 
 
 ---
@@ -248,7 +248,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 |código | descrição
 |-|-
-| **200** | dados do usuario retornados
+| **200** | dados do usuario retornados com sucesso
 | **404** | id do usuario não encontrado
 
 
