@@ -85,7 +85,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 ```js
 {
     tarefa{
-        tarefa_id: 3,
+        tarefa_id: 1,
         nome: "Arquitetura de Dados"
     }
     descricao: "Tarefa de DBE",
@@ -151,7 +151,10 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ```js
 {
-    login_id: 1,
+    login{
+        login_id: 1,
+        nome: "mouratins"
+    }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6401',
     senha: "Eu4moDBE",
@@ -172,7 +175,10 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 ```js
 {
-    login_id: 1,
+   login{
+     login_id: 1,
+     nome: "mouratins"
+   }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6401',
     senha: "Eu4moDBE",
@@ -198,7 +204,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 {
     login{
         login_id: 1,
-        nome: "mouratins"
+        nome: "martoura"
     }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6450',
@@ -226,7 +232,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 {
     login{
         login_id: 1,
-        nome: "mouratins"
+        nome: "martoura"
     }
     email: "mouratins@hotmail.com",
     telefone: '11 94446-6450',
