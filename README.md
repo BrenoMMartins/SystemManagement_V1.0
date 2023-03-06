@@ -57,23 +57,6 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 
 `DELETE`/systemmanagement_V1.0-/api/tarefa/{id}
 
-**Exemplo corpo de resposta**
-
-```js
-{
-    tarefa{
-        tarefa_id: 1,
-        nome: "Plano de Voo"
-    }
-    descricao: "Tarefa de DBE",
-    data: '2023-02-27',
-    prioridade{
-        prioridade_id: 2,
-        nome: "Urgente"
-    }
-}
-```
-
 |código | descrição
 |-|-
 | **200** | tarefa apagada com sucesso
@@ -175,19 +158,6 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 ## Apagar Usuario 
 
 `DELETE`/systemmanagement_V1.0-/api/usuario{id}
-
-```js
-{
-   login{
-     login_id: 1,
-     nome: "mouratins"
-   }
-    email: "mouratins@hotmail.com",
-    telefone: '11 94446-6401',
-    senha: "Eu4moDBE",
-}
-
-```
 
 **Respostas**
 
