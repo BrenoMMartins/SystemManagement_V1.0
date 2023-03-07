@@ -1,16 +1,14 @@
 package br.com.fiap.SystemManagement_V10.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class despesaController {
     
-    @RequestMapping("/api/despesas")
-    @ResponseBody
+    @GetMapping("/api/despesas")
     public String show(){
-        return "despesa";
+        return "Despesas do System";
     }
 
 }
