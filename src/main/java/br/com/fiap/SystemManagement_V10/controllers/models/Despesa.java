@@ -5,10 +5,11 @@ import java.time.LocalDate;
 
 public class Despesa {
     
+    private Long id;
     private BigDecimal valor;
     private LocalDate data;
     private String descrição;
-
+    
     
     public Despesa(BigDecimal valor, LocalDate data, String descrição) {
         this.valor = valor;
@@ -19,6 +20,14 @@ public class Despesa {
     @Override
     public String toString() {
         return "Despesa [valor=" + valor + ", data=" + data + ", descrição=" + descrição + "]";
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public String getDescrição() {
