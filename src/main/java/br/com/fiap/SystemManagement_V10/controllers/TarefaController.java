@@ -22,11 +22,6 @@ public class TarefaController {
     
     Logger log = LoggerFactory.getLogger(TarefaController.class);
 
-    // @GetMapping ("/api/tarefa")
-    // public Tarefa show(){
-    //     return new Tarefa ("Plano de Voo", "Tarefa de Digital Entreprise",  LocalDate.now());
-    // }
-
     List<Tarefa> tarefas = new ArrayList<>();
 
     @GetMapping("/api/tarefa")
