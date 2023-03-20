@@ -1,12 +1,13 @@
 package br.com.fiap.SystemManagement_V10.controllers.models;
 
 public class Usuario {
+
+
     private String login;
     private String nome;
     private String email;
     private String telefone;
     private String senha;
-
     
     public Usuario(String login, String nome, String email, String telefone, String senha) {
         this.login = login;
