@@ -9,7 +9,6 @@ public class Usuario {
     private String telefone;
     private String senha;
     
-    
     public Usuario(Long id, String login, String nome, String email, String telefone, String senha) {
         this.id = id;
         this.login = login;
@@ -21,6 +20,10 @@ public class Usuario {
 
     }
 
+    @Override
+    public String toString() {
+        return "Usuario [login=" + login + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", senha=" + senha + "]";
+    }
 
     public Long getId() {
         return id;
