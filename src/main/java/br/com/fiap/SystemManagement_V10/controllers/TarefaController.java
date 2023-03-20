@@ -68,7 +68,7 @@ public class TarefaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();        
     }
 
-    @PutMapping("api/despesas/{id}")
+    @PutMapping("api/tarefa/{id}")
     public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, @RequestBody Tarefa tarefa){
         log.info("Buscando tarefa pelo id " + id);
         var tarefaEncontrada = tarefas.stream().filter(a -> a.getId().equals(id)).findFirst();
