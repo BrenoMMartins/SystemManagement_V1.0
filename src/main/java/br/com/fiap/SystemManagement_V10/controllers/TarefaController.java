@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.SystemManagement_V10.controllers.models.Tarefa;
+import br.com.fiap.SystemManagement_V10.models.Tarefa;
 
 @RestController
 public class TarefaController {

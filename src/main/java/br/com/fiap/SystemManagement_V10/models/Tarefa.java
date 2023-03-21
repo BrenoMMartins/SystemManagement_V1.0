@@ -1,4 +1,4 @@
-package br.com.fiap.SystemManagement_V10.controllers.models;
+package br.com.fiap.SystemManagement_V10.models;
 
 import java.time.LocalDate;
 

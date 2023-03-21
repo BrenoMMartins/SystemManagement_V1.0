@@ -18,7 +18,7 @@ import java.util.List;
 
 
 
-import br.com.fiap.SystemManagement_V10.controllers.models.Usuario;
+import br.com.fiap.SystemManagement_V10.models.Usuario;
 
 @RestController
 public class UsuarioController {
