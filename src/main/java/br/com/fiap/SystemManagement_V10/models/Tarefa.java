@@ -2,30 +2,22 @@ package br.com.fiap.SystemManagement_V10.models;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
 public class Tarefa {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome; 
-    private String descrição;
+    private String descricao;
     private LocalDate data;
         
-    public Tarefa(String nome, String descrição, LocalDate data) {
+    public Tarefa(String nome, String descricao, LocalDate data) {
         this.nome = nome;
-        this.descrição = descrição;
+        this.descricao = descricao;
         this.data = data;
     }
     
     @Override
     public String toString() {
-        return "Tarefa [nome=" + nome + ", descrição=" + descrição + ", data=" + data + "]";
+        return "Tarefa [nome=" + nome + ", descricao=" + descricao + ", data=" + data + "]";
     }
 
     public Long getId() {
@@ -47,13 +39,13 @@ public class Tarefa {
     }
 
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
 
