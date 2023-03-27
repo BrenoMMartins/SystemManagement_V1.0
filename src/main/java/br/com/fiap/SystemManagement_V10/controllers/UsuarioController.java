@@ -22,6 +22,7 @@ import java.util.List;
 import br.com.fiap.SystemManagement_V10.models.Usuario;
 import br.com.fiap.SystemManagement_V10.repository.UsuarioRepository;
 
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {

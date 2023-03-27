@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.SystemManagement_V10.models.Tarefa;
 import br.com.fiap.SystemManagement_V10.repository.TarefaRepository;
 
+
 @RestController
 @RequestMapping("/api/tarefa")
 public class TarefaController {
     
     Logger log = LoggerFactory.getLogger(TarefaController.class);
-
     
-
     @Autowired
     TarefaRepository repository;
 
