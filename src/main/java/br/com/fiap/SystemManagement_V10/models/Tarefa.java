@@ -1,9 +1,15 @@
 package br.com.fiap.SystemManagement_V10.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
 public class Tarefa {
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome; 
     private String descricao;
