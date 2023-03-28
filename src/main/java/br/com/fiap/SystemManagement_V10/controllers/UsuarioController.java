@@ -25,6 +25,7 @@ import br.com.fiap.SystemManagement_V10.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 
 
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
