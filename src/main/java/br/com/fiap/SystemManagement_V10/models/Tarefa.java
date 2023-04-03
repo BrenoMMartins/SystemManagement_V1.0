@@ -1,7 +1,6 @@
 package br.com.fiap.SystemManagement_V10.models;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +12,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Tarefa {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
