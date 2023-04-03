@@ -1,10 +1,12 @@
 package br.com.fiap.SystemManagement_V10.controllers;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-
 import br.com.fiap.SystemManagement_V10.models.Usuario;
 import br.com.fiap.SystemManagement_V10.repository.UsuarioRepository;
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -40,9 +43,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+    public ResponseEntity<Object> create(@RequestBody @Valid Usuario usuario){
+        //if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationError("Erro de validação"));
         log.info("Cadastrando usuario: " + usuario);
-        
         repository.save(usuario);
         
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
@@ -75,7 +78,8 @@ public class UsuarioController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario){
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody @Valid Usuario usuario){
+        //if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationError("Erro de validação"));
         log.info("buscando usuario com id " + id);
         var usuarioEncontrado = repository.findById(id);
         
