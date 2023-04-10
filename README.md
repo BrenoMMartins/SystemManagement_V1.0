@@ -16,6 +16,12 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
     - [alterar](#alterar-usuario)
     - [detalhes](#detalhes-do-usuario)
 
+- Empresa 
+    - [cadastrar](#cadastrar-empresa) 
+    - [apagar](#alterar-empresa)
+    - [alterar](#alterar-empresa)
+    - [detalhes](#detalhes-da-empresa)
+
 ---
 
 ### Cadastrar da Tarefa 
@@ -220,6 +226,120 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 |-|-
 | **200** | dados do usuario retornados com sucesso
 | **404** | id do usuario não encontrado
+
+---
+
+### Cadastrar Empresa 
+
+`POST`/systemmanagement_V1.0-/api/empresa
+
+**Campos da Requisição**
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|---
+|empresa_id | int | sim | id da empresa
+|email | texto | sim | o email da empresa 
+|cnpj| int | sim | cnpj da empresa 
+|endereco | texto | não | endereço da empresa
+|telefone | int | sim | telefone da empresa 
+
+**Exemplo corpo de requisição**
+
+```js
+{
+    empresa{
+        empresa_id: 1,
+        nome: "FIAP"
+    }
+    email: "fiap@fiap.com.br",
+    cnpj: '28252381000115',
+    endereco: "AVENIDA LINS DE VASCONCELOS, 1222",
+    telefone: "11 3385-8010",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **201** | empresa cadastrada com sucesso 
+| **400** | campos inválidos
+---
+## Apagar Empresa 
+
+`DELETE`/systemmanagement_V1.0-/api/empresa{id}
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **200** | empresa apagada com sucesso 
+| **404** | id da empresa não encontrado
+---
+
+### Alterar Usuario
+
+`PUT`/systemmanagement_V1.0-/api/empresa{id}
+
+**Exemplo corpo de resposta**
+
+```js
+{
+    empresa{
+        empresa_id: 1,
+        nome: "FIAP PAULISTA"
+    }
+    email: "fiap@fiap.com.br",
+    cnpj: '28252381000115',
+    endereco: "Av. Paulista, 1106",
+    telefone: "11 3385-8010",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **202** | empresa alterado com sucesso
+| **401** | email ja cadastrado
+
+---
+
+### Detalhes da Empresa
+
+`GET`/systemmanagement_V1.0-/api/empresa{id}
+
+**Exemplo corpo de resposta**
+
+```js
+{
+   empresa{
+        empresa_id: 1,
+        nome: "FIAP"
+    }
+    email: "fiap@fiap.com.br",
+    cnpj: '28252381000115',
+    endereco: "AVENIDA LINS DE VASCONCELOS, 1222",
+    telefone: "11 3385-8010",
+}
+
+```
+
+**Respostas**
+
+|código | descrição
+|-|-
+| **200** | dados da empresa retornados com sucesso
+| **404** | id da empresa não encontrado
+
+---
+
+
+
+
+
 
 
 
