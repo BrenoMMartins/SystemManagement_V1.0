@@ -241,7 +241,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 |email | texto | sim | o email da empresa 
 |cnpj| int | sim | cnpj da empresa 
 |endereco | texto | não | endereço da empresa
-|telefone | int | sim | telefone da empresa 
+|telefone | texto | sim | telefone da empresa 
 
 **Exemplo corpo de requisição**
 
@@ -278,7 +278,7 @@ Repositorio destinada a aula de DBE, gerenciador de tarefas.
 | **404** | id da empresa não encontrado
 ---
 
-### Alterar Usuario
+### Alterar Empresa
 
 `PUT`/systemmanagement_V1.0-/api/empresa{id}
 
