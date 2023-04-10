@@ -1,52 +1,50 @@
 package br.com.fiap.SystemManagement_V10.models;
 
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
 @Data
-public class Usuario {
-    
+public class Empresa {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotBlank
-    private String login;
-    
-    @NotBlank @Size(min = 5, max = 35)
     private String nome;
     
-    @NotNull
-    private String email;
+    @NotEmpty
+    private String email; 
     
-    @NotBlank @Size(min = 10, max = 11)
-    private String telefone;
+    @NotBlank @Size(min = 14, max = 14)
+    private Integer cnpj;
     
-    @NotBlank
-    private String senha;
+    private String endereco;
 
-    protected Usuario (){}
-    
-    public Usuario(String login, String nome, String email, String telefone, String senha) {
-        this.login = login;
+    @NotBlank @NotNull
+    private String telefone;
+        
+    public Empresa(String nome, String email, int cnpj, String endereco, String telefone) {
         this.nome = nome;
         this.email = email;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
         this.telefone = telefone;
-        this.senha = senha;
     }
-
+    
     @Override
     public String toString() {
-        return "Usuario [login=" + login + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", senha=" + senha + "]";
+        return "Empresa [nome=" + nome + ", email=" + email + ", cnpj=" + cnpj + ", endereco=" + endereco + ", telefone=" + telefone + "]";
     }
 
     public Long getId() {
@@ -57,18 +55,7 @@ public class Usuario {
     public void setId(Long id) {
         this.id = id;
     }
-
-
-    public String getLogin() {
-        return login;
-    }
-
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-
+    
     public String getNome() {
         return nome;
     }
@@ -89,6 +76,24 @@ public class Usuario {
     }
 
 
+    public Integer getCnpj() {
+        return cnpj;
+    }
+
+
+    public void setCnpj(Integer cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -98,15 +103,6 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-
-    public String getSenha() {
-        return senha;
-    }
-
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
-
 }
+
