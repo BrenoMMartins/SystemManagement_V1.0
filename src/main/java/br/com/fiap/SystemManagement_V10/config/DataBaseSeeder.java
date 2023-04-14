@@ -1,4 +1,4 @@
-import java.math.BigDecimal;
+package br.com.fiap.SystemManagement_V10.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.fiap.SystemManagement_V10.models.Empresa;
 import br.com.fiap.SystemManagement_V10.repository.EmpresaRepository;
-
 import java.util.List;
 
 @Configuration
@@ -17,11 +16,12 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        contaRepository.saveAll(List.of(
-            new Empresa(1, "FIAP", "gumora18@hotmail.com", Integer(02266454000134)),
-            new Empresa(2L, "bradesco", new BigDecimal(50), "coin"),
-            new Empresa(3L, "carteira", new BigDecimal(2), "coin")
-        ));
+
+        empresaRepository.saveAll(List.of(
+                new Empresa((long) 1, "FIAP", "fiap@fiap.com.br", "28252381000115",
+                        "Avenida Lins de Vasconselos, 1222", "(11)33858010"),
+                new Empresa((long) 2, "Stefanini", "info@stefanini.com.br", "01530329000127",
+                        "Avenida Deputado Cristovam Chiaradia, 670", "(31)30253800")));
 
     }
 

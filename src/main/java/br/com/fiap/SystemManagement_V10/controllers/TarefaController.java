@@ -2,7 +2,6 @@ package br.com.fiap.SystemManagement_V10.controllers;
 
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,73 +17,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.SystemManagement_V10.exception.RestNotFoundException;
 import br.com.fiap.SystemManagement_V10.models.Tarefa;
 import br.com.fiap.SystemManagement_V10.repository.TarefaRepository;
 import jakarta.validation.Valid;
 
-
-
 @RestController
 @RequestMapping("/api/tarefa")
 public class TarefaController {
-    
-    Logger log = LoggerFactory.getLogger(TarefaController.class);
-    
+
+    Logger log = LoggerFactory.getLogger(getClass());
+
     @Autowired
     TarefaRepository repository;
 
     @GetMapping("/api/tarefa")
-    public List<Tarefa> index(){
+    public List<Tarefa> index() {
         return repository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Tarefa> create(@RequestBody @Valid Tarefa tarefa, BindingResult result){
-        if(result.hasErrors()) return ResponseEntity.badRequest().build();
+    public ResponseEntity<Tarefa> create(@RequestBody @Valid Tarefa tarefa, BindingResult result) {
         log.info("Cadastrando Tarefa: " + tarefa);
         repository.save(tarefa);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefa);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Tarefa> mostrar(@PathVariable long id){
+    public ResponseEntity<Tarefa> mostrar(@PathVariable long id) {
         log.info("Buscando tarefa pelo id: " + id);
-        var tarefaEncontrada = repository.findById(id);
-
-        if (tarefaEncontrada.isPresent()) {
-            return ResponseEntity.ok(tarefaEncontrada.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(getTarefa(id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Tarefa> destruir(@PathVariable Long id){
+    public ResponseEntity<Tarefa> destruir(@PathVariable Long id) {
         log.info("Buscando tarefa pelo id " + id);
-        var tarefaEncontrada = repository.findById(id);
-
-        if (tarefaEncontrada.isEmpty())
-            return ResponseEntity.notFound().build();
-
-
-        return ResponseEntity.noContent().build();        
+        repository.delete(getTarefa(id));
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, @RequestBody @Valid Tarefa tarefa){
+    public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, @RequestBody @Valid Tarefa tarefa) {
         log.info("Buscando tarefa pelo id " + id);
-        var tarefaEncontrada = repository.findById(id);
-
-        if (tarefaEncontrada.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        
+        getTarefa(id);
         tarefa.setId(id);
         repository.save(tarefa);
-        
-        return ResponseEntity.status(HttpStatus.OK).body(tarefa);
+        return ResponseEntity.ok(tarefa);
     }
 
+    private Tarefa getTarefa(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RestNotFoundException("Tarefa não encontrada"));
+    }
 
 }
