@@ -1,6 +1,5 @@
 package br.com.fiap.SystemManagement_V10.controllers;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,81 +15,60 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.List;
 
-
+import br.com.fiap.SystemManagement_V10.exception.RestNotFoundException;
 import br.com.fiap.SystemManagement_V10.models.Usuario;
 import br.com.fiap.SystemManagement_V10.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 
-
-
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
-    
-    Logger log = LoggerFactory.getLogger(UsuarioController.class);
 
-    
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     UsuarioRepository repository;
-    
-    @GetMapping 
-    public List<Usuario> index(){
+
+    @GetMapping
+    public List<Usuario> index() {
         return repository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody @Valid Usuario usuario){
-        //if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationError("Erro de validação"));
-        log.info("Cadastrando usuario: " + usuario);
+    public ResponseEntity<Object> create(@RequestBody @Valid Usuario usuario) {
+        log.info("Cadatrando Usuario: " + usuario);
         repository.save(usuario);
-        
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
-    
-    @GetMapping ("{id}")
-    public ResponseEntity<Usuario> show(@PathVariable Long id){
-        log.info("buscando usuarios com id " + id);
-        var usuarioEncontrado = repository.findById(id);
 
-        if (usuarioEncontrado.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        return ResponseEntity.ok(usuarioEncontrado.get());
-            
+    @GetMapping("{id}")
+    public ResponseEntity<Usuario> show(@PathVariable Long id) {
+        log.info("Buscando usuarios com id " + id);
+        return ResponseEntity.ok(getUsuario(id));
 
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Usuario> destroy(@PathVariable Long id){
-        log.info("buscando usuario com id " + id);
-        var usuarioEncontrado = repository.findById(id);
-        
-        if (usuarioEncontrado.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        repository.delete(usuarioEncontrado.get());
-
+    public ResponseEntity<Usuario> destroy(@PathVariable Long id) {
+        log.info("Apagando usuario com id " + id);
+        repository.delete(getUsuario(id));
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody @Valid Usuario usuario){
-        //if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationError("Erro de validação"));
-        log.info("buscando usuario com id " + id);
-        var usuarioEncontrado = repository.findById(id);
-        
-        if (usuarioEncontrado.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody @Valid Usuario usuario) {
+        log.info("Atualizando usuario com id " + id);
+        getUsuario(id);
         usuario.setId(id);
         repository.save(usuario);
+        return ResponseEntity.ok(usuario);
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(usuario);
+    private Usuario getUsuario(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RestNotFoundException("Usuario não encontrado"));
     }
 
 }
