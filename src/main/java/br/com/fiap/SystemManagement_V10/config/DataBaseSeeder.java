@@ -9,7 +9,7 @@ import br.com.fiap.SystemManagement_V10.repository.EmpresaRepository;
 import java.util.List;
 
 @Configuration
-public class DatabaseSeeder implements CommandLineRunner {
+public class DataBaseSeeder implements CommandLineRunner {
 
     @Autowired
     EmpresaRepository empresaRepository;
