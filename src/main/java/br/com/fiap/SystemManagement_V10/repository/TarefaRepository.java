@@ -8,7 +8,7 @@ import br.com.fiap.SystemManagement_V10.models.Tarefa;
 
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
-    Page<Tarefa> findByDescricaoContaining(String descricao, org.springframework.data.domain.Pageable pageable);
+    Page<Tarefa> findByDescricaoContaining(String descricao, Pageable pageable);
 
     Page<Tarefa> findAll(Pageable pageable);
 
