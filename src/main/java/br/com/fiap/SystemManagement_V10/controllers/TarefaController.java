@@ -3,7 +3,7 @@ package br.com.fiap.SystemManagement_V10.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
