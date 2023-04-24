@@ -41,6 +41,10 @@ public class Usuario {
     private String senha;
 
     protected Usuario (){}
+
+    public static Empresa getUsuario() {
+        return null;
+    }
     
 
 }

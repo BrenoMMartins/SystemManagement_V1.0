@@ -3,9 +3,12 @@ package br.com.fiap.SystemManagement_V10.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -33,14 +36,16 @@ public class TarefaController {
     @Autowired
     TarefaRepository repository;
 
+    @Autowired
+    PagedResourcesAssembler<Object> assembler;
+
     @GetMapping
-    public Page<Tarefa> index(@RequestParam(required = false) String tarefa,
-            @PageableDefault(size = 6) Pageable pageable) {
+    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String tarefa, @PageableDefault(size = 6) Pageable pageable) {
+        Page<Tarefa> tarefas = (tarefa == null)?
+            repository.findAll(pageable):
+            repository.findByDescricaoContaining(tarefa, pageable);
 
-        if (tarefa == null)
-            return repository.findAll(pageable);
-
-        return repository.findByDescricaoContaining(tarefa, pageable);
+        return assembler.toModel(tarefas.map(Tarefa::toEntityModel));
     }
 
     @PostMapping
@@ -51,9 +56,11 @@ public class TarefaController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Tarefa> mostrar(@PathVariable long id) {
+    public EntityModel<Tarefa> mostrar(@PathVariable long id) {
         log.info("Buscando tarefa pelo id: " + id);
-        return ResponseEntity.ok(getTarefa(id));
+        return getTarefa(id).toEntityModel();
+    
+        
     }
 
     @DeleteMapping("{id}")
@@ -64,12 +71,14 @@ public class TarefaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, @RequestBody @Valid Tarefa tarefa) {
+    public EntityModel<Tarefa> atualizar(@PathVariable Long id, @RequestBody @Valid Tarefa tarefa) {
         log.info("Buscando tarefa pelo id " + id);
         getTarefa(id);
+        
         tarefa.setId(id);
         repository.save(tarefa);
-        return ResponseEntity.ok(tarefa);
+        
+        return tarefa.toEntityModel();
     }
 
     private Tarefa getTarefa(Long id) {
