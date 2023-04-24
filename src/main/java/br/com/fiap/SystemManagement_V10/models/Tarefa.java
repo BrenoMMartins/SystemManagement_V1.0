@@ -1,6 +1,14 @@
 package br.com.fiap.SystemManagement_V10.models;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.time.LocalDate;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+
+import br.com.fiap.SystemManagement_V10.controllers.TarefaController;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,15 +21,13 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(of = "id")
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
+@NoArgsConstructor
 public class Tarefa {
 
     @Id
@@ -41,6 +47,14 @@ public class Tarefa {
     @ManyToOne
     private Empresa empresa;
 
-    
+    public EntityModel <Tarefa> toEntityModel(){
+        return EntityModel.of( 
+            this,
+            linkTo(methodOn(TarefaController.class).mostrar(id)).withSelfRel(),
+            linkTo(methodOn(TarefaController.class).destruir(id)).withRel("delete"),
+            linkTo(methodOn(TarefaController.class).index(null, Pageable.unpaged())).withRel("all"),
+            linkTo(methodOn(TarefaController.class).mostrar(this.getEmpresa().getId())).withRel("empresa")
+            );
+    }
 
 }
