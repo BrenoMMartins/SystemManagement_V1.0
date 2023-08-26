@@ -1,8 +1,10 @@
 package br.com.fiap.SystemManagement_V10.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -11,7 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -20,21 +21,32 @@ public class SecurityConfig {
     @Autowired
     AuthorizationFilter authorizationFilter;
 
+    @Autowired
+    Environment env;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http
+        http
             .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/registrar").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**"). permitAll()
-                .anyRequest().authenticated()
+                
             .and()
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .formLogin().disable()
-            .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();
+            .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        if (env.getActiveProfiles().length > 0 && env.getActiveProfiles()[0].equals("open")){
+            http.authorizeHttpRequests().anyRequest().permitAll();
+        }else{
+            http.authorizeHttpRequests().anyRequest().authenticated();
+        }
+
+        return http.build();
+            
     }
 
     @Bean
